@@ -1,12 +1,3 @@
-const decodeTheRing = function (s, p) {
-
-    // write your code here
-
-  };
-  
-  module.exports = decodeTheRing;
-
-
   const decodeTheRing = function (s, p) {
     // Two pointers: i for the message (s) and j for the pattern (p)
     let i = 0, j = 0;
