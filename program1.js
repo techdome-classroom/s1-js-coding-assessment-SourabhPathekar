@@ -1,7 +1,7 @@
 // program1.js
 
 const getTotalIsles = (grid) => {
-  if (!grid || grid.length === 0) return 0;  // Base case: if grid is empty
+  if (!grid || grid.length === 0) return 0; 
 
   let numberOfIslands = 0;
 
