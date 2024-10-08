@@ -1,25 +1,36 @@
-const decodeTheRing = function (message, key) {
-  // Helper function to check if message matches the key with wildcards
-  const match = (message, key, i, j) => {
-      
-      if (j === key.length) return i === message.length;
+// program1.js
 
-      // Case when '*' matches zero characters or more characters
-      if (key[j] === '*') {
-          return match(message, key, i, j + 1) || (i < message.length && match(message, key, i + 1, j));
+const getTotalIsles = (grid) => {
+  if (!grid || grid.length === 0) return 0;  // Base case: if grid is empty
+
+  let numberOfIslands = 0;
+
+  const dfs = (i, j) => {
+      // Check bounds and whether the cell is land
+      if (i < 0 || i >= grid.length || j < 0 || j >= grid[0].length || grid[i][j] === 'W') {
+          return;
       }
 
-      // Case when '?' matches any single character, or current key and message characters match
-      if (i < message.length && (key[j] === '?' || key[j] === message[i])) {
-          return match(message, key, i + 1, j + 1);
-      }
+      // Mark the land as visited
+      grid[i][j] = 'W';  // Change 'L' to 'W' to mark as visited
 
-      // If there is no match
-      return false;
+      // Explore all four directions
+      dfs(i + 1, j); // Down
+      dfs(i - 1, j); // Up
+      dfs(i, j + 1); // Right
+      dfs(i, j - 1); // Left
   };
 
-  // Initial call to the helper function
-  return match(message, key, 0, 0);
+  for (let i = 0; i < grid.length; i++) {
+      for (let j = 0; j < grid[0].length; j++) {
+          if (grid[i][j] === 'L') {  // Found an unvisited land
+              numberOfIslands++;
+              dfs(i, j);  // Start DFS to mark all connected lands
+          }
+      }
+  }
+
+  return numberOfIslands;  // Return total number of islands
 };
 
-module.exports = decodeTheRing;
+module.exports = getTotalIsles;
