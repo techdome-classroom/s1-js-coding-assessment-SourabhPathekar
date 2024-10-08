@@ -1,7 +1,7 @@
 const decodeTheRing = function (message, key) {
   // Helper function to check if message matches the key with wildcards
   const match = (message, key, i, j) => {
-      // If key is exhausted, check if message is also exhausted
+      
       if (j === key.length) return i === message.length;
 
       // Case when '*' matches zero characters or more characters
